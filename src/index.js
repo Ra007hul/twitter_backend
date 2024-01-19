@@ -1,23 +1,51 @@
-const express = require('express')
-const connect = require('./config/database')
+import express from 'express'
+import {connect} from './config/database.js'
+import apiRoutes from './routes/index.js'
+import bodyParser from 'body-parser';
 const app = express();
-const TweetRepository = require('./repository/tweet-repository')
-const Tweet = new TweetRepository();
-const Comment = require('./Models/comment');
+const router = express.Router();
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended : true}))
+
+app.use('/api',apiRoutes)
+
 app.listen(3000,async ()=>{
     console.log("server started at port 3000");
     await connect();
-     const tweet = await Tweet.create({
-        content : "Created a seprate comment schema"
-     })
-     const comment = await Comment.create({
-        content : "First comment with comment schema"
-     })
-     tweet.comments.push(comment)
-     await tweet.save();
-     console.log(tweet)
+   //   const tweet = await Tweet.create({
+   //      content : "Created a seprate comment schema"
+   //   })
+   //   const comment = await Comment.create({
+   //      content : "First comment with comment schema"
+   //   })
+   //   tweet.comments.push(comment)
+   //   await tweet.save();
+   //   console.log(tweet)
 
-    console.log('MongoDb connected');
+    // const hashtagrepo = new HashtagRepository();
+    //  hashtagrepo.bulkCreate([
+    //    {
+    //       title : "Trend",
+    //       tweet : []
+    //    },
+    //    {
+    //       title : "cool",
+    //       tweet : []
+    //    },
+    //    {
+    //       title : "First",
+    //       tweet : []
+    //    },
+    //    {
+    //       title :  "Fake",
+    //       tweet : []
+    //    }
+    //  ])
+    // const obj = new TweetService();
+    // obj.create({content : "#Learning Web dev"})
+  
+    // console.log('MongoDb connected');
 
 
 
