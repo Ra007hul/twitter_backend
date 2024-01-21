@@ -37,6 +37,15 @@ class TweetService{
             console.log('Servic layer', error)
           }
     }
+
+    async get(tweetId){
+      try {
+          const tweet = await this.tweetRepository.getWithComments(tweetId)
+          return tweet
+      } catch (error) {
+        throw error
+      }
+    }
 }
 
 export default TweetService
