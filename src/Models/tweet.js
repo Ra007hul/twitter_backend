@@ -6,10 +6,13 @@ const tweetSchema = new  mongoose.Schema({
         required : true,
         max  : [250 , 'Too many characters']
     },
-   hashtags : [{
-    type : mongoose.Schema.Types.ObjectId,
-     ref : 'Hashtag'
-   }]
+    likes : [
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : 'Like'
+
+        }
+    ]
    
 },{timestamps : true})
 
